@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adetya Tino Forrestiawan — Data Scientist &amp; Geospatial Analyst</title>
+
+    <!-- SEO & Social Preview -->
+    <meta name="description" content="Portfolio of Adetya Tino Forrestiawan — Data Scientist &amp; Geospatial Analyst. Geomatics Engineering graduate from ITS with experience at the Geological Agency and ITS, turning geospatial and complex data into actionable insights through machine learning and advanced analytics.">
+    <meta name="author" content="Adetya Tino Forrestiawan">
+    <meta name="keywords" content="Data Scientist, Data Analyst, Geospatial, Web GIS, Machine Learning, Python, SQL, Power BI, Streamlit, Adetya Tino">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Adetya Tino Forrestiawan — Data Scientist &amp; Geospatial Analyst">
+    <meta property="og:description" content="Portfolio of data science, machine learning, and Web GIS projects. Open to Data Scientist and Data Analyst opportunities.">
+    <meta property="og:image" content="Portfolio_foto.png">
+    <meta property="og:url" content="https://adetyatino.github.io/AdetyaTinoPortfolio/">
+    <link rel="canonical" href="https://adetyatino.github.io/AdetyaTinoPortfolio/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50:  '#f0f9ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            950: '#13204c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #fafafa; }
+
+        .organic-shape { border-radius: 4rem; }
+
+        .bg-pattern {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Offset so anchors are not hidden behind the sticky navbar */
+        section[id] { scroll-margin-top: 5.5rem; }
+
+        /* Fade-in animation on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .6s ease-out, transform .6s ease-out;
+        }
+        .reveal.is-visible { opacity: 1; transform: none; }
+
+        /* Active navigation link */
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: -6px;
+            height: 2px; width: 0;
+            background-color: #13204c;
+            transition: width .25s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: #0f172a; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            html { scroll-behavior: auto; }
+        }
+
+        /* Visible keyboard focus ring */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #2563eb;
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        /* Skip link: hidden until focused by keyboard.
+           Written in plain CSS because Tailwind's focus:not-sr-only variant
+           did not take effect through the CDN build. */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            z-index: 60;
+        }
+        .skip-link:focus {
+            left: 0.75rem;
+            top: 0.75rem;
+            background-color: #13204c;
+            color: #fff;
+            padding: 0.75rem 1.25rem;
+            border-radius: 9999px;
+            font-size: .875rem;
+            font-weight: 700;
+        }
+
+        /* Print / save-as-PDF layout */
+        @media print {
+            nav, #to-top, .no-print { display: none !important; }
+            body { background: #fff !important; }
+
+            /* Browsers print without background graphics by default, so dark
+               blocks would render as white text on white paper. Force them light. */
+            [class*="bg-slate-8"],
+            [class*="bg-slate-9"],
+            [class*="bg-brand-950"] {
+                background: #fff !important;
+                border: 1px solid #cbd5e1 !important;
+            }
+            #resume, #resume *,
+            footer, footer *,
+            .bg-brand-950, .bg-brand-950 * {
+                color: #0f172a !important;
+            }
+
+            /* Printed copies lose hyperlinks, so spell the project URLs out */
+            #projects a[target="_blank"]::after {
+                content: " — " attr(href);
+                font-size: 10px;
+                font-weight: 400;
+                color: #475569;
+            }
+
+            /* Keep cards intact instead of splitting whole sections */
+            article, aside, .rounded-3xl, .rounded-2xl { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased bg-pattern">
+
+    <!--
+        Social media icon sprite.
+        Recent versions of Lucide no longer ship brand icons (LinkedIn/GitHub),
+        so these are defined once here and reused through <use>.
+    -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="hidden" aria-hidden="true">
+        <symbol id="icon-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+        </symbol>
+        <symbol id="icon-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        </symbol>
+        <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle cx="17.5" cy="6.5" r="1"></circle>
+        </symbol>
+    </svg>
+
+    <!-- Skip link for keyboard users -->
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <!-- ============================ NAVBAR ============================ -->
+    <nav class="fixed w-full top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex justify-between items-center gap-4">
+
+            <!-- Name / Logo -->
+            <a href="#home" class="text-lg font-extrabold tracking-tight text-slate-900 shrink-0">
+                Adetya<span class="text-brand-900">.</span>
+            </a>
+
+            <!-- Desktop menu -->
+            <div class="hidden md:flex space-x-8 font-semibold text-sm text-slate-500">
+                <a href="#home" class="nav-link hover:text-brand-900 transition-colors" data-nav="home">Home</a>
+                <a href="#expertise" class="nav-link hover:text-brand-900 transition-colors" data-nav="expertise">Expertise</a>
+                <a href="#projects" class="nav-link hover:text-brand-900 transition-colors" data-nav="projects">Projects</a>
+                <a href="#resume" class="nav-link hover:text-brand-900 transition-colors" data-nav="resume">Resume</a>
+                <a href="#contact" class="nav-link hover:text-brand-900 transition-colors" data-nav="contact">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <!-- Social icons -->
+                <div class="hidden sm:flex space-x-4 text-slate-600">
+                    <a href="https://linkedin.com/in/adetyatinofo" target="_blank" rel="noopener" aria-label="LinkedIn" class="hover:text-brand-900 transition-colors">
+                        <svg class="w-5 h-5"><use href="#icon-linkedin"></use></svg>
+                    </a>
+                    <a href="https://github.com/adetyatino" target="_blank" rel="noopener" aria-label="GitHub" class="hover:text-brand-900 transition-colors">
+                        <svg class="w-5 h-5"><use href="#icon-github"></use></svg>
+                    </a>
+                    <a href="https://www.instagram.com/adetyatinof" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-brand-900 transition-colors">
+                        <svg class="w-5 h-5"><use href="#icon-instagram"></use></svg>
+                    </a>
+                    <a href="mailto:adetyatino@gmail.com" aria-label="Email" class="hover:text-brand-900 transition-colors">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </a>
+                </div>
+
+                <!-- Download CV button -->
+                <a href="CV-AdetyaTinoForrestiawan.pdf" download="CV-Adetya-Tino-Forrestiawan-EN.pdf" type="application/pdf"
+                   class="hidden md:inline-flex items-center gap-2 bg-brand-950 text-white text-xs font-bold uppercase tracking-wide py-2.5 px-5 rounded-full hover:bg-brand-900 transition-colors">
+                    <i data-lucide="download" class="w-4 h-4"></i> CV
+                </a>
+
+                <!-- Mobile menu button -->
+                <button id="menu-btn" aria-label="Open menu" aria-expanded="false"
+                        class="md:hidden text-slate-800 p-1 -mr-1">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile menu panel -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white">
+            <div class="px-6 py-4 flex flex-col space-y-1 font-semibold text-sm">
+                <a href="#home" class="py-2.5 text-slate-700 hover:text-brand-900">Home</a>
+                <a href="#expertise" class="py-2.5 text-slate-700 hover:text-brand-900">Expertise</a>
+                <a href="#projects" class="py-2.5 text-slate-700 hover:text-brand-900">Projects</a>
+                <a href="#resume" class="py-2.5 text-slate-700 hover:text-brand-900">Resume</a>
+                <a href="#contact" class="py-2.5 text-slate-700 hover:text-brand-900">Contact</a>
+                <a href="CV-AdetyaTinoForrestiawan.pdf" download="CV-Adetya-Tino-Forrestiawan-EN.pdf" type="application/pdf"
+                   class="mt-2 bg-brand-950 text-white py-3 px-5 rounded-full text-center uppercase tracking-wide text-xs">
+                    Download CV (EN)
+                </a>
+                <a href="CV_AdetyaTinoForrestiawan.pdf" download="CV-Adetya-Tino-Forrestiawan-ID.pdf" type="application/pdf" lang="id"
+                   class="border-2 border-slate-200 text-slate-700 py-3 px-5 rounded-full text-center uppercase tracking-wide text-xs">
+                    Unduh CV (ID)
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main">
+
+    <!-- ============================ HERO ============================ -->
+    <section id="home" class="pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center w-full">
+
+            <!-- Left column: photo -->
+            <div class="relative w-full aspect-[4/5] md:aspect-square max-w-md mx-auto md:mr-0 organic-shape overflow-hidden shadow-2xl shadow-slate-200 order-1 md:order-none">
+                <img src="Portfolio_foto.png"
+                     alt="Portrait of Adetya Tino Forrestiawan"
+                     class="w-full h-full object-cover object-top scale-105 hover:scale-110 transition-transform duration-700">
+            </div>
+
+            <!-- Right column: introduction -->
+            <div class="flex flex-col justify-center items-center md:items-start text-center md:text-left">
+
+                <!-- Availability status -->
+                <span class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold uppercase tracking-wide px-4 py-1.5 rounded-full mb-6">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    Open to Work
+                </span>
+
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.1] mb-5">
+                    Hi, I'm <br/> Adetya Tino, <br/>
+                    <span class="text-brand-900">Data Scientist &amp; Geospatial Analyst.</span>
+                </h1>
+
+                <p class="text-base md:text-lg text-slate-600 mb-6 max-w-xl leading-relaxed font-medium">
+                    A <strong class="text-slate-800 font-semibold">Geomatics Engineering</strong> graduate from Sepuluh Nopember Institute of Technology with hands-on experience as a <strong class="text-slate-800 font-semibold">Data Analyst</strong> and <strong class="text-slate-800 font-semibold">Data Scientist</strong>. I process, clean, analyse, and visualise data with Python, SQL, Excel, and Power BI to produce insights that support business decision-making — spanning HR business dashboards, predictive analytics, and geospatial distribution systems.
+                </p>
+
+                <!-- Quick contact details -->
+                <div class="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 text-sm text-slate-500 font-medium mb-8">
+                    <a href="mailto:adetyatino@gmail.com" class="inline-flex items-center gap-1.5 hover:text-brand-900 transition-colors">
+                        <i data-lucide="mail" class="w-4 h-4 text-brand-900"></i> adetyatino@gmail.com
+                    </a>
+                    <a href="https://wa.me/6285233869497" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 hover:text-brand-900 transition-colors">
+                        <i data-lucide="phone" class="w-4 h-4 text-brand-900"></i> +62 852-3386-9497
+                    </a>
+                    <span class="inline-flex items-center gap-1.5">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-brand-900"></i> Ponorogo, East Java
+                    </span>
+                    <span class="inline-flex items-center gap-1.5">
+                        <i data-lucide="graduation-cap" class="w-4 h-4 text-brand-900"></i> B.Eng. Geomatics Engineering, ITS
+                    </span>
+                </div>
+
+                <!-- Call-to-action buttons (wrap so they never overflow the narrow tablet column) -->
+                <div class="flex flex-col sm:flex-row sm:flex-wrap justify-center md:justify-start w-full sm:w-auto gap-3 mb-10">
+                    <a href="CV-AdetyaTinoForrestiawan.pdf" download="CV-Adetya-Tino-Forrestiawan-EN.pdf" type="application/pdf"
+                       class="inline-flex items-center justify-center gap-2 bg-brand-950 text-white font-bold py-3.5 px-8 rounded-full hover:bg-brand-900 hover:shadow-lg transition-all tracking-wide text-sm uppercase">
+                        <i data-lucide="download" class="w-4 h-4"></i> Download CV
+                    </a>
+                    <a href="#projects"
+                       class="inline-flex items-center justify-center gap-2 bg-white text-brand-950 border-2 border-brand-950 font-bold py-3.5 px-8 rounded-full hover:bg-brand-50 transition-all tracking-wide text-sm uppercase">
+                        <i data-lucide="folder-open" class="w-4 h-4"></i> View Projects
+                    </a>
+                    <a href="https://linkedin.com/in/adetyatinofo" target="_blank" rel="noopener"
+                       class="inline-flex items-center justify-center gap-2 bg-white text-slate-700 border-2 border-slate-200 font-bold py-3.5 px-8 rounded-full hover:border-slate-400 transition-all tracking-wide text-sm uppercase">
+                        <svg class="w-4 h-4"><use href="#icon-linkedin"></use></svg>LinkedIn
+                    </a>
+                </div>
+
+                <!-- Key figures -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full border-t border-slate-200 pt-8">
+                    <div>
+                        <p class="text-2xl md:text-3xl font-extrabold text-slate-900">5+</p>
+                        <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide mt-1">Data Projects</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl md:text-3xl font-extrabold text-slate-900">3</p>
+                        <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide mt-1">Work Experiences</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl md:text-3xl font-extrabold text-slate-900">5</p>
+                        <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide mt-1">Certifications</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl md:text-3xl font-extrabold text-slate-900">65K+</p>
+                        <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide mt-1">Records Processed</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================ EXPERTISE ============================ -->
+    <section id="expertise" class="py-24 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+            <div class="max-w-3xl mb-14 reveal">
+                <p class="text-sm font-bold uppercase tracking-widest text-brand-900 mb-3">What I Do</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Core Expertise</h2>
+                <p class="text-slate-600 leading-relaxed">
+                    A combination of data science and geospatial engineering — from processing large-scale raw data and building statistical and machine learning models, to presenting the results in dashboards that are ready to support real decisions.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Competency 1 -->
+                <div class="bg-slate-50 rounded-3xl p-7 border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 reveal">
+                    <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center mb-5">
+                        <i data-lucide="code-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Data Engineering</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        Building pipelines for cleaning, transforming, and integrating multi-source data, validating data quality, and managing spatial databases.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Python</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">SQL</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">R</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">PostgreSQL / PostGIS</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Node.js</span>
+                    </div>
+                </div>
+
+                <!-- Competency 2 -->
+                <div class="bg-slate-50 rounded-3xl p-7 border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 reveal">
+                    <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center mb-5">
+                        <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Machine Learning</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        Predictive modelling and driver analysis: risk classification, hierarchical modelling, plus model evaluation and robustness testing.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Random Forest</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">XGBoost</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Hierarchical Linear Model</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Recommendation System</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">EDA</span>
+                    </div>
+                </div>
+
+                <!-- Competency 3 -->
+                <div class="bg-slate-50 rounded-3xl p-7 border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 reveal">
+                    <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center mb-5">
+                        <i data-lucide="globe-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Geospatial Analysis</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        Spatial analysis and mapping, geodesic distance optimisation, high-precision GNSS data processing, and Web GIS delivery.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">ArcGIS &amp; QGIS</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">GAMIT/GLOBK</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Generic Mapping Tools</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Agisoft Metashape</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Folium</span>
+                    </div>
+                </div>
+
+                <!-- Competency 4 -->
+                <div class="bg-slate-50 rounded-3xl p-7 border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 reveal">
+                    <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center mb-5">
+                        <i data-lucide="layout-dashboard" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Analytics &amp; BI</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        Translating analytical results into clear decision-support dashboards that non-technical stakeholders can act on.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Power BI</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Tableau</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Excel</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Streamlit</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">HTML / JavaScript</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================ PROJECTS ============================ -->
+    <section id="projects" class="py-24 bg-slate-50 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+            <div class="max-w-3xl mb-14 reveal">
+                <p class="text-sm font-bold uppercase tracking-widest text-brand-900 mb-3">Portfolio</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Selected Projects</h2>
+                <p class="text-slate-600 leading-relaxed">
+                    Five selected projects covering the full workflow: framing the problem, processing the data, building the model, and shipping a finished product you can open right now.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+                <!-- Project 1 -->
+                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="book-open" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Public Sector</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 leading-snug">
+                            Predictive Modeling &amp; Spatial Mapping of School Literacy and Numeracy
+                        </h3>
+                        <p class="text-xs font-semibold text-brand-900 mb-4">
+                            Pusdatin, Ministry of Primary &amp; Secondary Education · Data Science Trainee · 2026
+                        </p>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                            A decision-support dashboard on literacy and numeracy performance across <strong class="text-slate-800">65,101 primary schools</strong> in six provinces of Java. It integrates Rapor Pendidikan, Dapodik, BOSP, and DJPK/IPM data (84,097 records), models the driving factors with a two-level Hierarchical Linear Model (schools nested within regencies/cities), and maps regional gaps spatially.
+                        </p>
+                        <ul class="text-sm text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Data quality audit and validation across five sources</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Model diagnostics and sensitivity testing</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Automated data export and per-region reporting</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Hierarchical Linear Model</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Spatial Mapping</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Data Integration</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Streamlit</span>
+                        </div>
+                        <a href="https://finalprojectpusdatin.streamlit.app/" target="_blank" rel="noopener"
+                           class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
+                            View Dashboard <i data-lucide="arrow-up-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Retail &amp; Supply Chain</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 leading-snug">
+                            SOPRA Intelligence Hubs
+                        </h3>
+                        <p class="text-xs font-semibold text-brand-900 mb-4">
+                            PT. Solusi Prima Packaging · Junior AI &amp; Data Engineer · Jun 2026
+                        </p>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                            An analytics platform that helps reseller partners maximise logistics margin and retail sales conversion through interactive visualisation, artificial intelligence, and accurate supply chain forecasting.
+                        </p>
+                        <ul class="text-sm text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> AI-based product recommendation engine driven by customer preferences and purchasing behaviour</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Sales data analysis to help resellers shape promotional strategy</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Product demand forecasting to optimise stock and reduce overstock risk</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Product Selection</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Promotion Strategy</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Smart Recommendation</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Conversion Engine</span>
+                        </div>
+                        <a href="https://kleq4vydmrrc6xmmk68t37.streamlit.app/" target="_blank" rel="noopener"
+                           class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
+                            View Application <i data-lucide="arrow-up-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="bar-chart-2" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">People Analytics</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 leading-snug">
+                            HR Business Dashboard &amp; Predictive Analytics
+                        </h3>
+                        <p class="text-xs font-semibold text-brand-900 mb-4">
+                            Dicoding · Data Scientist · Mar – Apr 2026
+                        </p>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                            An analytics system for the HR department covering cleaning, transformation, and preprocessing of employee data in Python — including missing-value handling and attrition status processing.
+                        </p>
+                        <ul class="text-sm text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> HR KPI dashboard: headcount, resignation trends, attrition rate</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> EDA to identify the main drivers of employee attrition</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Random Forest model for feature importance and turnover risk by department</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Random Forest</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Data Analysis</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Python</span>
+                        </div>
+                        <a href="https://datascienceproject-ja5ymavaprmywgbxsyqvjm.streamlit.app/" target="_blank" rel="noopener"
+                           class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
+                            View Dashboard <i data-lucide="arrow-up-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Education</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 leading-snug">
+                            Early Detection System for Student Dropouts
+                        </h3>
+                        <p class="text-xs font-semibold text-brand-900 mb-4">
+                            Dicoding · Data Scientist · Mar – Apr 2026
+                        </p>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                            An early-warning system for student dropout risk based on academic performance and demographic characteristics, built in Python with the XGBoost algorithm.
+                        </p>
+                        <ul class="text-sm text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> EDA on the main factors influencing dropout risk</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Interactive dashboard for academic performance and student trends</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Early-intervention recommendations derived from the predictions</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">XGBoost</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Machine Learning</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">EDA</span>
+                        </div>
+                        <a href="https://datascienceproject2-ls8yctqjaculgtx6fcd3fa.streamlit.app/" target="_blank" rel="noopener"
+                           class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
+                            View Application <i data-lucide="arrow-up-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 5 -->
+                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="map" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Geospatial</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 leading-snug">
+                            Distribution Analysis Web GIS System
+                        </h3>
+                        <p class="text-xs font-semibold text-brand-900 mb-4">
+                            Independent Project · Data &amp; GIS Analyst
+                        </p>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                            A geospatial distribution system applying geodesic algorithms to optimise the nearest distribution centre, delivered through a Web GIS dashboard built with Folium and JavaScript.
+                        </p>
+                        <ul class="text-sm text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Geodesic distance calculation between service points</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Interactive map for distribution planning</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Web GIS</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Geospatial Analysis</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Optimization</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Folium</span>
+                        </div>
+                        <span class="inline-flex items-center text-sm font-bold text-slate-400">
+                            Internal Project <i data-lucide="lock" class="w-4 h-4 ml-1"></i>
+                        </span>
+                    </div>
+                </article>
+
+                <!-- Contact call-to-action card (not a project, so not an <article>) -->
+                <aside class="bg-brand-950 text-white rounded-3xl p-8 flex flex-col justify-center items-start reveal">
+                    <div class="w-12 h-12 bg-white/10 text-blue-300 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Interested in my work?</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                        I'm open to <strong class="text-white font-semibold">Data Scientist</strong>, <strong class="text-white font-semibold">Data Analyst</strong>, and <strong class="text-white font-semibold">GIS Analyst</strong> roles. Let's talk about how I can contribute to your team.
+                    </p>
+                    <a href="#contact" class="inline-flex items-center gap-2 bg-white text-brand-950 text-sm font-bold uppercase tracking-wide py-3 px-6 rounded-full hover:bg-blue-50 transition-colors">
+                        Get in Touch <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </aside>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================ RESUME ============================ -->
+    <section id="resume" class="py-24 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+            <div class="max-w-3xl mb-14 reveal">
+                <p class="text-sm font-bold uppercase tracking-widest text-blue-400 mb-3">Background</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Resume</h2>
+                <p class="text-slate-400 leading-relaxed">
+                    Professional experience in national-scale survey and geodynamic data processing, backed by an academic background in Geomatics Engineering and certifications in AI and data science.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+                <!-- Work experience -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-extrabold mb-10 flex items-center">
+                        <i data-lucide="briefcase" class="w-7 h-7 mr-3 text-blue-400"></i> Experience
+                    </h3>
+
+                    <div class="relative border-l border-slate-700 ml-2 space-y-10">
+
+                        <!-- Job 1 -->
+                        <div class="pl-8 relative">
+                            <div class="absolute w-4 h-4 bg-blue-500 ring-4 ring-blue-500/20 rounded-full -left-[9px] top-1"></div>
+                            <h4 class="text-lg font-bold leading-snug">Land Surveyor &amp; Geodynamic Data Analyst</h4>
+                            <p class="text-blue-400 font-medium text-sm mb-1">Geological Agency · Contract</p>
+                            <p class="text-slate-500 text-xs font-semibold uppercase tracking-wide mb-3">May 2024 – Dec 2024</p>
+                            <ul class="text-slate-400 text-sm leading-relaxed space-y-2">
+                                <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Conducted GNSS surveys and coordinated field teams for high-precision geospatial data collection.</li>
+                                <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Processed and analysed GNSS data using Linux-based GAMIT/GLOBK.</li>
+                                <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Visualised and validated GNSS data quality through Signal-to-Noise Ratio (SNR) and Skyplot analysis.</li>
+                                <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Interpreted geospatial analysis results to support data-driven identification of soil deformation patterns.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Job 2 -->
+                        <div class="pl-8 relative">
+                            <div class="absolute w-4 h-4 bg-slate-600 rounded-full -left-[9px] top-1"></div>
+                            <h4 class="text-lg font-bold leading-snug">Research Assistant</h4>
+                            <p class="text-blue-400 font-medium text-sm mb-1">Sepuluh Nopember Institute of Technology · Apprenticeship</p>
+                            <p class="text-slate-500 text-xs font-semibold uppercase tracking-wide mb-3">Nov 2023 – Dec 2024</p>
+                            <ul class="text-slate-400 text-sm leading-relaxed space-y-2">
+                                <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Processed survey data from the Geospatial Information Agency using GAMIT on Linux.</li>
+                                <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Produced a Probabilistic Seismic Hazard Analysis of earthquakes in Lampung Province.</li>
+                                <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Built an automated map plotting program with Generic Mapping Tools from spatial processing results.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Job 3 -->
+                        <div class="pl-8 relative">
+                            <div class="absolute w-4 h-4 bg-slate-600 rounded-full -left-[9px] top-1"></div>
+                            <h4 class="text-lg font-bold leading-snug">Cadastral Surveyor</h4>
+                            <p class="text-blue-400 font-medium text-sm mb-1">ATR/BPN Surabaya 1 · Internship</p>
+                            <p class="text-slate-500 text-xs font-semibold uppercase tracking-wide mb-3">Aug 2023 – Sep 2023</p>
+                            <ul class="text-slate-400 text-sm leading-relaxed space-y-2">
+                                <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Conducted cadastral surveys for the separation of land certificates.</li>
+                                <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Produced plots from field survey results.</li>
+                                <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Maintained a data archive for every certified land parcel location.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Education, skills & certifications -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-extrabold mb-10 flex items-center">
+                        <i data-lucide="graduation-cap" class="w-7 h-7 mr-3 text-blue-400"></i> Education
+                    </h3>
+                    <div class="bg-slate-800 rounded-3xl p-8 mb-12 border border-slate-700">
+                        <h4 class="text-lg font-bold">Bachelor of Geomatics Engineering</h4>
+                        <p class="text-blue-400 font-medium text-sm mb-4">Sepuluh Nopember Institute of Technology (ITS) · Aug 2020 – Feb 2025</p>
+                        <p class="text-slate-300 font-medium text-sm">GPA 3.06 / 4.00</p>
+                    </div>
+
+                    <h3 class="text-2xl font-extrabold mb-6 flex items-center">
+                        <i data-lucide="wrench" class="w-7 h-7 mr-3 text-blue-400"></i> Technical Skills
+                    </h3>
+                    <div class="space-y-5 mb-12">
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2.5">Programming &amp; Database</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Python</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">R</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">SQL</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">MATLAB</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Java</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Node.js</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">PostgreSQL (PostGIS)</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2.5">Machine Learning &amp; Analytics</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Exploratory Data Analysis</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Data Cleaning &amp; Preprocessing</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Predictive Analytics</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Machine Learning</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2.5">Visualization &amp; Business Intelligence</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Power BI</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Tableau</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Microsoft Excel</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Streamlit</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2.5">Geospatial &amp; Engineering</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">ArcGIS</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">QGIS</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">GAMIT/GLOBK</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">AutoCAD</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Agisoft Metashape</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Surpac</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2.5">Web Development</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">JavaScript</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">HTML</span>
+                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Licenses & certifications: full width so it no longer overloads the right column -->
+            <div class="mt-20 pt-16 border-t border-slate-800 reveal">
+                <h3 class="text-2xl font-extrabold mb-3 flex items-center">
+                    <i data-lucide="badge-check" class="w-7 h-7 mr-3 text-blue-400"></i> Licenses &amp; Certifications
+                </h3>
+                <p class="text-slate-400 leading-relaxed max-w-3xl mb-10">
+                    Verifiable credentials across artificial intelligence, applied data science, drone operation, and construction safety.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                    <!-- Pusdatin — ongoing, no certificate issued yet -->
+                    <div class="bg-slate-800 rounded-2xl p-6 border border-blue-500/40 flex flex-col">
+                        <div class="flex items-start justify-between gap-3 mb-5">
+                            <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center shrink-0">
+                                <i data-lucide="award" class="w-5 h-5"></i>
+                            </div>
+                            <span class="shrink-0 text-[10px] font-bold uppercase tracking-wide bg-blue-500/15 text-blue-300 border border-blue-500/30 px-2.5 py-1 rounded-full">Ongoing</span>
+                        </div>
+                        <p class="font-bold text-sm leading-snug mb-2">Data Science Trainee</p>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                            Applied data science traineeship at the Ministry's Data and Information Centre, delivering the national primary-school literacy and numeracy modelling dashboard.
+                        </p>
+                        <div class="mt-auto pt-4 border-t border-slate-700">
+                            <p class="text-slate-300 text-xs font-semibold">Pusdatin, Ministry of Primary &amp; Secondary Education</p>
+                            <p class="text-slate-500 text-[11px] mt-1">Runs until Aug 2026</p>
+                        </div>
+                    </div>
+
+                    <!-- Azure AI Fundamentals -->
+                    <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col">
+                        <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-5">
+                            <i data-lucide="brain-circuit" class="w-5 h-5"></i>
+                        </div>
+                        <p class="font-bold text-sm leading-snug mb-2">Azure AI Fundamentals (AI-900)</p>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                            Foundational certification covering artificial intelligence and machine learning workloads on Microsoft Azure.
+                        </p>
+                        <div class="mt-auto pt-4 border-t border-slate-700">
+                            <p class="text-slate-300 text-xs font-semibold">Microsoft · Certiport</p>
+                            <p class="text-slate-500 text-[11px] mt-1">Issued 31 Mar 2026 · Verify code wYa7m-2FMo</p>
+                        </div>
+                    </div>
+
+                    <!-- Dicoding — Applied Data Science -->
+                    <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col">
+                        <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-5">
+                            <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+                        </div>
+                        <p class="font-bold text-sm leading-snug mb-2">Applied Data Science</p>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                            110-hour industry-standard programme: data science project management, business dashboards, customer segmentation, credit-scoring models, big data with PySpark, and cloud deployment — assessed by a final exam and an end-to-end project.
+                        </p>
+                        <div class="mt-auto pt-4 border-t border-slate-700">
+                            <p class="text-slate-300 text-xs font-semibold">Dicoding Indonesia</p>
+                            <p class="text-slate-500 text-[11px] mt-1">Issued 18 Apr 2026 · Valid to 18 Apr 2029 · ID QLZ99V25MZ5D</p>
+                        </div>
+                    </div>
+
+                    <!-- APDI — Remote Pilot Certificate -->
+                    <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col">
+                        <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-5">
+                            <i data-lucide="plane" class="w-5 h-5"></i>
+                        </div>
+                        <p class="font-bold text-sm leading-snug mb-2">Remote Pilot Certificate — Drone Operation</p>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                            43-hour DGCA-approved training in aviation regulation, airspace classification and flight restrictions, weather, emergency procedures, radio communication, and preflight maintenance — plus a practical basic-manoeuvres flight test.
+                        </p>
+                        <div class="mt-auto pt-4 border-t border-slate-700">
+                            <p class="text-slate-300 text-xs font-semibold">Asosiasi Pilot Drone Indonesia (APDI) · DGCA UASTC-002</p>
+                            <p class="text-slate-500 text-[11px] mt-1">Issued 15 Jun 2025 · Valid 2 years · Cert. No. 11651-2025</p>
+                        </div>
+                    </div>
+
+                    <!-- BNSP — Construction Safety -->
+                    <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col">
+                        <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-5">
+                            <i data-lucide="hard-hat" class="w-5 h-5"></i>
+                        </div>
+                        <p class="font-bold text-sm leading-snug mb-2">Safety Construction Junior Expert</p>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                            National competence certification in Construction Safety, classified under Executive Management at KKNI Level 7 and issued through LSP Manajemen Konstruksi Nusantara.
+                        </p>
+                        <div class="mt-auto pt-4 border-t border-slate-700">
+                            <p class="text-slate-300 text-xs font-semibold">BNSP — Indonesia Professional Certification Authority</p>
+                            <p class="text-slate-500 text-[11px] mt-1">Issued 5 Jun 2025 · Valid 5 years · No. 74321 2263.02 7 00000288 2025</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Leadership & organizational activities -->
+            <div class="mt-20 pt-16 border-t border-slate-800 reveal">
+                <h3 class="text-2xl font-extrabold mb-10 flex items-center">
+                    <i data-lucide="users" class="w-7 h-7 mr-3 text-blue-400"></i> Leadership &amp; Organizational Activities
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    <div class="bg-slate-800 rounded-3xl p-7 border border-slate-700">
+                        <h4 class="text-base font-bold leading-snug mb-1">Laboratory Assistant</h4>
+                        <p class="text-blue-400 font-medium text-sm mb-1">Geodesy &amp; Geodynamics Laboratory, ITS</p>
+                        <p class="text-slate-500 text-xs font-semibold uppercase tracking-wide mb-4">Nov 2023 – Dec 2024</p>
+                        <ul class="text-slate-400 text-sm leading-relaxed space-y-2">
+                            <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Contributed to academic projects and research activities.</li>
+                            <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Delivered teamwork-based assignments.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-3xl p-7 border border-slate-700">
+                        <h4 class="text-base font-bold leading-snug mb-1">Geocentric Event Staff</h4>
+                        <p class="text-blue-400 font-medium text-sm mb-1">ITS Geomatics Student Association</p>
+                        <p class="text-slate-500 text-xs font-semibold uppercase tracking-wide mb-4">Oct 2021 – Aug 2024</p>
+                        <ul class="text-slate-400 text-sm leading-relaxed space-y-2">
+                            <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Person in charge of the 2022 ITS Geomatics Engineering graduation ceremony.</li>
+                            <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Produced event documentation and designed sponsorship proposals.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-3xl p-7 border border-slate-700">
+                        <h4 class="text-base font-bold leading-snug mb-1">Public Relations — Community Service</h4>
+                        <p class="text-blue-400 font-medium text-sm mb-1">Ponorogo Regency</p>
+                        <p class="text-slate-500 text-xs font-semibold uppercase tracking-wide mb-4">Jun – Aug 2022</p>
+                        <ul class="text-slate-400 text-sm leading-relaxed space-y-2">
+                            <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Installed on-grid solar power systems.</li>
+                            <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Connected the service team with the local community and delivered solar power education.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================ CONTACT ============================ -->
+    <section id="contact" class="py-24 bg-white border-t border-slate-100">
+        <div class="max-w-4xl mx-auto px-6 md:px-12 text-center reveal">
+            <p class="text-sm font-bold uppercase tracking-widest text-brand-900 mb-3">Get in Touch</p>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-5">Let's Work Together</h2>
+            <p class="text-slate-600 leading-relaxed max-w-2xl mx-auto mb-10">
+                I'm currently open to full-time and project-based opportunities in <strong class="text-slate-800">Data Science</strong>, <strong class="text-slate-800">Data Analytics</strong>, and <strong class="text-slate-800">Geospatial Analysis</strong>. Feel free to reach out by email or LinkedIn — I'll get back to you promptly.
+            </p>
+
+            <div class="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 mb-12">
+                <a href="mailto:adetyatino@gmail.com"
+                   class="inline-flex items-center justify-center gap-2 bg-brand-950 text-white font-bold py-3.5 px-8 rounded-full hover:bg-brand-900 hover:shadow-lg transition-all tracking-wide text-sm uppercase">
+                    <i data-lucide="mail" class="w-4 h-4"></i> Send an Email
+                </a>
+                <a href="https://wa.me/6285233869497" target="_blank" rel="noopener"
+                   class="inline-flex items-center justify-center gap-2 bg-white text-brand-950 border-2 border-brand-950 font-bold py-3.5 px-8 rounded-full hover:bg-brand-50 transition-all tracking-wide text-sm uppercase">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp
+                </a>
+                <a href="https://linkedin.com/in/adetyatinofo" target="_blank" rel="noopener"
+                   class="inline-flex items-center justify-center gap-2 bg-white text-slate-700 border-2 border-slate-200 font-bold py-3.5 px-8 rounded-full hover:border-slate-400 transition-all tracking-wide text-sm uppercase">
+                    <svg class="w-4 h-4"><use href="#icon-linkedin"></use></svg>LinkedIn
+                </a>
+            </div>
+
+            <!-- CV download, both languages -->
+            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 mb-12">
+                <p class="text-sm font-bold text-slate-800 mb-1">Curriculum Vitae</p>
+                <p class="text-sm text-slate-500 mb-5">Available in English and Bahasa Indonesia (PDF).</p>
+                <div class="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3">
+                    <a href="CV-AdetyaTinoForrestiawan.pdf" download="CV-Adetya-Tino-Forrestiawan-EN.pdf" type="application/pdf"
+                       class="inline-flex items-center justify-center gap-2 bg-brand-950 text-white font-bold py-3 px-6 rounded-full hover:bg-brand-900 transition-all tracking-wide text-xs uppercase">
+                        <i data-lucide="download" class="w-4 h-4"></i> Download CV — English
+                    </a>
+                    <a href="CV_AdetyaTinoForrestiawan.pdf" download="CV-Adetya-Tino-Forrestiawan-ID.pdf" type="application/pdf" lang="id"
+                       class="inline-flex items-center justify-center gap-2 bg-white text-slate-700 border-2 border-slate-200 font-bold py-3 px-6 rounded-full hover:border-slate-400 transition-all tracking-wide text-xs uppercase">
+                        <i data-lucide="download" class="w-4 h-4"></i> Unduh CV — Bahasa Indonesia
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+                <a href="mailto:adetyatino@gmail.com" class="bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-brand-200 transition-colors">
+                    <i data-lucide="mail" class="w-5 h-5 text-brand-900 mb-3"></i>
+                    <p class="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Email</p>
+                    <p class="text-sm font-semibold text-slate-800 break-all">adetyatino@gmail.com</p>
+                </a>
+                <a href="https://linkedin.com/in/adetyatinofo" target="_blank" rel="noopener" class="bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-brand-200 transition-colors">
+                    <svg class="w-5 h-5 text-brand-900 mb-3"><use href="#icon-linkedin"></use></svg>
+                    <p class="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">LinkedIn</p>
+                    <p class="text-sm font-semibold text-slate-800 break-all">in/adetyatinofo</p>
+                </a>
+                <a href="https://github.com/adetyatino" target="_blank" rel="noopener" class="bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-brand-200 transition-colors">
+                    <svg class="w-5 h-5 text-brand-900 mb-3"><use href="#icon-github"></use></svg>
+                    <p class="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">GitHub</p>
+                    <p class="text-sm font-semibold text-slate-800 break-all">@adetyatino</p>
+                </a>
+                <a href="https://wa.me/6285233869497" target="_blank" rel="noopener" class="bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-brand-200 transition-colors">
+                    <i data-lucide="message-circle" class="w-5 h-5 text-brand-900 mb-3"></i>
+                    <p class="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">WhatsApp</p>
+                    <p class="text-sm font-semibold text-slate-800 break-all">+62 852-3386-9497</p>
+                </a>
+            </div>
+
+            <p class="text-sm text-slate-500 mt-6 inline-flex items-center gap-1.5">
+                <i data-lucide="map-pin" class="w-4 h-4 text-brand-900"></i> Ponorogo Regency, East Java — open to relocation and remote work
+            </p>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- ============================ FOOTER ============================ -->
+    <footer class="bg-slate-950 text-slate-500 py-10 text-center text-sm border-t border-slate-800">
+        <p class="font-semibold text-slate-300 mb-1">Adetya Tino Forrestiawan</p>
+        <p class="mb-2">Data Scientist &amp; Geospatial Analyst · Ponorogo, East Java</p>
+        <p>&copy; <span id="year">2026</span> · Built to solve geospatial &amp; data challenges.</p>
+    </footer>
+
+    <!-- Back-to-top button -->
+    <button id="to-top" aria-label="Back to top"
+            class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-brand-950 text-white shadow-lg items-center justify-center hover:bg-brand-900 transition-all opacity-0 pointer-events-none flex">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+
+    <script>
+        // ---- Lucide icons ----
+        lucide.createIcons();
+
+        // ---- Auto-updating year in the footer ----
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // ---- Mobile menu ----
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.setAttribute('aria-expanded', String(!isOpen));
+            menuBtn.innerHTML = '<i data-lucide="' + (isOpen ? 'menu' : 'x') + '" class="w-6 h-6"></i>';
+            lucide.createIcons();
+        });
+
+        // Close the menu once a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+                lucide.createIcons();
+            });
+        });
+
+        // ---- Fade-in animation on scroll ----
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ---- Highlight the nav link for the section in view ----
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = [...navLinks].map(link => document.querySelector(link.getAttribute('href')));
+
+        const spyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    const active = document.querySelector('.nav-link[href="#' + entry.target.id + '"]');
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+
+        sections.forEach(section => { if (section) spyObserver.observe(section); });
+
+        // ---- Back-to-top button ----
+        const toTop = document.getElementById('to-top');
+
+        window.addEventListener('scroll', () => {
+            const show = window.scrollY > 600;
+            toTop.classList.toggle('opacity-0', !show);
+            toTop.classList.toggle('pointer-events-none', !show);
+        }, { passive: true });
+
+        toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    </script>
+</body>
+</html>
