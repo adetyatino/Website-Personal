@@ -15,7 +15,10 @@
     <meta property="og:image" content="Portfolio_foto.png">
     <meta property="og:url" content="https://adetyatino.github.io/AdetyaTinoPortfolio/">
     <link rel="canonical" href="https://adetyatino.github.io/AdetyaTinoPortfolio/">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+    <link rel="icon" href="assets/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -180,8 +183,10 @@
         <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex justify-between items-center gap-4">
 
             <!-- Name / Logo -->
-            <a href="#home" class="text-lg font-extrabold tracking-tight text-slate-900 shrink-0">
-                Adetya<span class="text-brand-900">.</span>
+            <a href="#home" class="flex items-center gap-2.5 shrink-0" aria-label="Adetya Tino Forrestiawan — home">
+                <img src="assets/logo-mark.png" alt="ATF monogram logo" width="206" height="128"
+                     class="h-8 w-auto" decoding="async">
+                <span class="text-lg font-extrabold tracking-tight text-slate-900">Adetya<span class="text-brand-900">.</span></span>
             </a>
 
             <!-- Desktop menu -->
@@ -788,13 +793,10 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-                    <!-- Pusdatin — ongoing, no certificate issued yet -->
-                    <div class="bg-slate-800 rounded-2xl p-6 border border-blue-500/40 flex flex-col">
-                        <div class="flex items-start justify-between gap-3 mb-5">
-                            <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center shrink-0">
-                                <i data-lucide="award" class="w-5 h-5"></i>
-                            </div>
-                            <span class="shrink-0 text-[10px] font-bold uppercase tracking-wide bg-blue-500/15 text-blue-300 border border-blue-500/30 px-2.5 py-1 rounded-full">Ongoing</span>
+                    <!-- Pusdatin — Data Science Trainee -->
+                    <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col">
+                        <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-5">
+                            <i data-lucide="award" class="w-5 h-5"></i>
                         </div>
                         <p class="font-bold text-sm leading-snug mb-2">Data Science Trainee</p>
                         <p class="text-slate-400 text-xs leading-relaxed mb-4">
@@ -985,6 +987,8 @@
 
     <!-- ============================ FOOTER ============================ -->
     <footer class="bg-slate-950 text-slate-500 py-10 text-center text-sm border-t border-slate-800">
+        <img src="assets/logo-mark-white.png" alt="ATF monogram logo" width="206" height="128"
+             class="h-10 w-auto mx-auto mb-4 opacity-90" loading="lazy" decoding="async">
         <p class="font-semibold text-slate-300 mb-1">Adetya Tino Forrestiawan</p>
         <p class="mb-2">Data Scientist &amp; Geospatial Analyst · Ponorogo, East Java</p>
         <p>&copy; <span id="year">2026</span> · Built to solve geospatial &amp; data challenges.</p>
