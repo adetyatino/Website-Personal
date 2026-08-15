@@ -11,7 +11,7 @@
     <meta name="keywords" content="Data Scientist, Data Analyst, Geospatial, Web GIS, Machine Learning, Python, SQL, Power BI, Streamlit, Adetya Tino">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Adetya Tino Forrestiawan — Data Scientist &amp; Geospatial Analyst">
-    <meta property="og:description" content="Portfolio of data science, machine learning, and Web GIS projects. Open to Data Scientist and Data Analyst opportunities.">
+    <meta property="og:description" content="Portfolio of data engineering, analytics engineering, machine learning, and Web GIS projects — pipelines, data quality, warehouse modelling, and dashboards. Open to Data Engineer, Data Analyst, and Data Scientist opportunities.">
     <meta property="og:image" content="Portfolio_foto.png">
     <meta property="og:url" content="https://adetyatino.github.io/AdetyaTinoPortfolio/">
     <link rel="canonical" href="https://adetyatino.github.io/AdetyaTinoPortfolio/">
@@ -318,7 +318,7 @@
                 <!-- Key figures -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full border-t border-slate-200 pt-8">
                     <div>
-                        <p class="text-2xl md:text-3xl font-extrabold text-slate-900">5+</p>
+                        <p class="text-2xl md:text-3xl font-extrabold text-slate-900">7+</p>
                         <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide mt-1">Data Projects</p>
                     </div>
                     <div>
@@ -360,12 +360,15 @@
                     </div>
                     <h3 class="text-lg font-bold text-slate-900 mb-2">Data Engineering</h3>
                     <p class="text-sm text-slate-600 leading-relaxed mb-4">
-                        Building pipelines for cleaning, transforming, and integrating multi-source data, validating data quality, and managing spatial databases.
+                        Orchestrating pipelines that clean, transform, and integrate multi-source data, guarding them with automated data quality tests, and modelling dimensional warehouses on top — plus managing spatial databases.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Python</span>
                         <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">SQL</span>
                         <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">R</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Apache Airflow</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">dbt</span>
+                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Trino / Iceberg</span>
                         <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">PostgreSQL / PostGIS</span>
                         <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Node.js</span>
                     </div>
@@ -437,13 +440,91 @@
                 <p class="text-sm font-bold uppercase tracking-widest text-brand-900 mb-3">Portfolio</p>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Selected Projects</h2>
                 <p class="text-slate-600 leading-relaxed">
-                    Five selected projects covering the full workflow: framing the problem, processing the data, building the model, and shipping a finished product you can open right now.
+                    Seven selected projects covering the full workflow: framing the problem, building the pipeline and warehouse model, guarding it with automated data quality tests, and shipping a finished model or dashboard you can open right now.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
                 <!-- Project 1 -->
+                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="layers" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Oil &amp; Gas</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 leading-snug">
+                            HUGIN — Volve Field Data Lakehouse (North Sea)
+                        </h3>
+                        <p class="text-xs font-semibold text-brand-900 mb-4">
+                            Personal Project · Data Engineer · Aug 2026 – Present
+                        </p>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                            An end-to-end pipeline over Equinor's open Volve field dataset, built with Apache Airflow, dbt, Apache Iceberg, and Trino on a bronze–silver–gold medallion architecture. A Kimball dimensional model with Slowly Changing Dimension Type 2 sits on top of six different source formats: production CSV, WITSML XML, LAS well logs, directional surveys, fixed-width ASCII, and reservoir simulation reports.
+                        </p>
+                        <ul class="text-sm text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Identity-resolution crosswalk unifying well-naming variants from three source systems into canonical identifiers, with coverage reporting and explicit handling of unmapped records</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Automated data quality tests (dbt tests and Soda Core) running in GitHub Actions on every pull request — grain validation, referential integrity, and domain business rules</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Cross-grain reconciliation between daily and monthly production, flagging out-of-tolerance differences automatically</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Apache Airflow</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">dbt</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Apache Iceberg</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Trino</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Medallion Architecture</span>
+                        </div>
+                        <a href="https://github.com/adetyatino/hugin" target="_blank" rel="noopener"
+                           class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
+                            View Repository <i data-lucide="arrow-up-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="credit-card" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Banking &amp; Fintech</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 leading-snug">
+                            BNPL Portfolio Quality &amp; Early Warning
+                        </h3>
+                        <p class="text-xs font-semibold text-brand-900 mb-4">
+                            Independent Project · Data Analyst · Aug 2026 – Present
+                        </p>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                            A credit-risk analytics pipeline (Python → DuckDB → dbt) with 18 layered models and 152 automated data quality tests, turning a 905K-row account-month panel and 527K transactions into 8 BI-ready data marts. Rate/mix/denominator decomposition shows the headline NPL drop from 2.59% to 2.41% (May–June 2026) came from receivables growth in the denominator, not from genuine portfolio improvement. The underlying data is synthetic, calibrated against the public OJK release of June 2026 — 7 of 7 metrics fall within a ±10% tolerance.
+                        </p>
+                        <ul class="text-sm text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Vintage curves, DPD roll rates, segment risk, and geographic early warning across 160 regencies and cities</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Limit-tightening and approval cut-off scenarios sized with Expected Loss = PD × EAD × LGD, showing the trade-off between avoided losses and forgone receivables</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Power BI dashboard covering portfolio health, vintage, roll rate, segment risk, and geographic risk</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">dbt</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">DuckDB</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">SQL</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Power BI</span>
+                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Credit Risk</span>
+                        </div>
+                        <a href="https://github.com/adetyatino/bnpl" target="_blank" rel="noopener"
+                           class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
+                            View Repository <i data-lucide="arrow-up-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
                 <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
@@ -481,7 +562,7 @@
                     </div>
                 </article>
 
-                <!-- Project 2 -->
+                <!-- Project 4 -->
                 <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
@@ -519,7 +600,7 @@
                     </div>
                 </article>
 
-                <!-- Project 3 -->
+                <!-- Project 5 -->
                 <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
@@ -556,7 +637,7 @@
                     </div>
                 </article>
 
-                <!-- Project 4 -->
+                <!-- Project 6 -->
                 <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
@@ -593,7 +674,7 @@
                     </div>
                 </article>
 
-                <!-- Project 5 -->
+                <!-- Project 7 -->
                 <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
