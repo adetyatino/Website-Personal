@@ -62,6 +62,101 @@
             background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
             background-size: 24px 24px;
         }
+        .surface { position: relative; overflow: hidden; }
+        .surface > * { position: relative; z-index: 1; }
+
+        /* Graticule terang */
+        .graticule::before {
+            content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+            background-image:
+                linear-gradient(to right, rgba(19,32,76,.055) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(19,32,76,.055) 1px, transparent 1px);
+            background-size: 28px 28px;
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+        }
+
+        /* Graticule gelap */
+        .graticule-dark::before {
+            content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size: 28px 28px;
+            -webkit-mask-image: radial-gradient(ellipse 90% 70% at 20% 0%, #000 35%, transparent 100%);
+            mask-image: radial-gradient(ellipse 90% 70% at 20% 0%, #000 35%, transparent 100%);
+        }
+
+        /* Cahaya lembut — dipakai maksimal 3x di seluruh halaman */
+        .glow-light::after {
+            content: ''; position: absolute; pointer-events: none; z-index: 0;
+            width: 720px; height: 720px; border-radius: 9999px;
+            background: radial-gradient(circle, rgba(37,99,235,.10) 0%, transparent 65%);
+        }
+        .glow-dark::after {
+            content: ''; position: absolute; pointer-events: none; z-index: 0;
+            width: 820px; height: 820px; border-radius: 9999px;
+            background: radial-gradient(circle, rgba(59,130,246,.16) 0%, transparent 65%);
+        }
+
+        /* Permukaan gelap yang tidak rata */
+        .surface-navy {
+            background-color: #13204c;
+            background-image: linear-gradient(180deg, #16265a 0%, #13204c 45%, #0e1839 100%);
+        }
+
+        /* Kartu di atas navy: tinted, bukan abu-abu */
+        .card-navy {
+            background: linear-gradient(180deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.03) 100%);
+            border: 1px solid rgba(255,255,255,.10);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+        }
+
+        /* Kartu terang: highlight tipis di tepi atas biar tidak seperti kotak putih tempelan */
+        .card-light { box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(15,23,42,.04); }
+
+        /* Pemisah section: hairline yang memudar, bukan garis penuh */
+        .rule-fade { height: 1px; border: 0; background: linear-gradient(90deg, transparent, rgba(148,163,184,.55), transparent); }
+        .rule-fade-dark { height: 1px; border: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent); }
+
+        .pill-light {
+            padding: .25rem .75rem;
+            background: rgba(255,255,255,.88);
+            border: 1px solid #e2e8f0;
+            border-radius: 9999px;
+            font-size: .75rem;
+            font-weight: 600;
+        }
+
+        .pill-dark {
+            display: inline-flex;
+            align-items: center;
+            padding: .375rem .875rem;
+            background: rgba(255,255,255,.06);
+            color: #e2e8f0;
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: .5rem;
+            font-size: .875rem;
+            font-weight: 600;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 1px;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(59,130,246,.55), rgba(148,163,184,.15));
+        }
+
+        .nav-scrolled { box-shadow: 0 12px 28px -20px rgba(19,32,76,.45); }
+
+        #home::after { top: -260px; right: -200px; }
+        #expertise::after { top: -260px; right: -200px; }
+        #contact::after { bottom: -300px; left: -220px; }
+        #resume::after { top: -320px; left: -300px; }
 
         /* Offset so anchors are not hidden behind the sticky navbar */
         section[id] { scroll-margin-top: 5.5rem; }
@@ -129,15 +224,23 @@
                blocks would render as white text on white paper. Force them light. */
             [class*="bg-slate-8"],
             [class*="bg-slate-9"],
-            [class*="bg-brand-950"] {
+            [class*="bg-brand-950"],
+            .surface-navy,
+            .card-navy,
+            footer {
                 background: #fff !important;
                 border: 1px solid #cbd5e1 !important;
             }
             #resume, #resume *,
             footer, footer *,
-            .bg-brand-950, .bg-brand-950 * {
+            .bg-brand-950, .bg-brand-950 *,
+            .surface-navy, .surface-navy *,
+            .card-navy, .card-navy * {
                 color: #0f172a !important;
             }
+            .graticule::before,
+            .graticule-dark::before,
+            [class*="glow-"]::after { display: none !important; }
 
             /* Printed copies lose hyperlinks, so spell the project URLs out */
             #projects a[target="_blank"]::after {
@@ -179,7 +282,7 @@
     <a href="#main" class="skip-link">Skip to content</a>
 
     <!-- ============================ NAVBAR ============================ -->
-    <nav class="fixed w-full top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80">
+    <nav id="site-nav" class="fixed w-full top-0 z-50 border-b border-slate-200/80 bg-white/85 backdrop-blur-md transition-shadow duration-300">
         <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex justify-between items-center gap-4">
 
             <!-- Name / Logo -->
@@ -252,7 +355,7 @@
     <main id="main">
 
     <!-- ============================ HERO ============================ -->
-    <section id="home" class="pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
+    <section id="home" class="surface glow-light py-24 pt-32 md:py-28 px-6 md:px-12 max-w-7xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center w-full">
 
             <!-- Left column: photo -->
@@ -339,8 +442,10 @@
         </div>
     </section>
 
+    <hr class="rule-fade">
+
     <!-- ============================ EXPERTISE ============================ -->
-    <section id="expertise" class="py-24 bg-white border-t border-slate-100">
+    <section id="expertise" class="surface graticule glow-light py-24 md:py-28 bg-white">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
 
             <div class="max-w-3xl mb-14 reveal">
@@ -363,14 +468,14 @@
                         Orchestrating pipelines that clean, transform, and integrate multi-source data, guarding them with automated data quality tests, and modelling dimensional warehouses on top — plus managing spatial databases.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Python</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">SQL</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">R</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Apache Airflow</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">dbt</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Trino / Iceberg</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">PostgreSQL / PostGIS</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Node.js</span>
+                        <span class="pill-light">Python</span>
+                        <span class="pill-light">SQL</span>
+                        <span class="pill-light">R</span>
+                        <span class="pill-light">Apache Airflow</span>
+                        <span class="pill-light">dbt</span>
+                        <span class="pill-light">Trino / Iceberg</span>
+                        <span class="pill-light">PostgreSQL / PostGIS</span>
+                        <span class="pill-light">Node.js</span>
                     </div>
                 </div>
 
@@ -384,11 +489,11 @@
                         Predictive modelling and driver analysis: risk classification, hierarchical modelling, plus model evaluation and robustness testing.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Random Forest</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">XGBoost</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Hierarchical Linear Model</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Recommendation System</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">EDA</span>
+                        <span class="pill-light">Random Forest</span>
+                        <span class="pill-light">XGBoost</span>
+                        <span class="pill-light">Hierarchical Linear Model</span>
+                        <span class="pill-light">Recommendation System</span>
+                        <span class="pill-light">EDA</span>
                     </div>
                 </div>
 
@@ -402,11 +507,11 @@
                         Spatial analysis and mapping, geodesic distance optimisation, high-precision GNSS data processing, and Web GIS delivery.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">ArcGIS &amp; QGIS</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">GAMIT/GLOBK</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Generic Mapping Tools</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Agisoft Metashape</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Folium</span>
+                        <span class="pill-light">ArcGIS &amp; QGIS</span>
+                        <span class="pill-light">GAMIT/GLOBK</span>
+                        <span class="pill-light">Generic Mapping Tools</span>
+                        <span class="pill-light">Agisoft Metashape</span>
+                        <span class="pill-light">Folium</span>
                     </div>
                 </div>
 
@@ -420,11 +525,11 @@
                         Translating analytical results into clear decision-support dashboards that non-technical stakeholders can act on.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Power BI</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Tableau</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Excel</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">Streamlit</span>
-                        <span class="px-3 py-1 bg-white text-xs font-semibold rounded-full border border-slate-200">HTML / JavaScript</span>
+                        <span class="pill-light">Power BI</span>
+                        <span class="pill-light">Tableau</span>
+                        <span class="pill-light">Excel</span>
+                        <span class="pill-light">Streamlit</span>
+                        <span class="pill-light">HTML / JavaScript</span>
                     </div>
                 </div>
 
@@ -432,8 +537,10 @@
         </div>
     </section>
 
+    <hr class="rule-fade">
+
     <!-- ============================ PROJECTS ============================ -->
-    <section id="projects" class="py-24 bg-slate-50 border-t border-slate-100">
+    <section id="projects" class="surface graticule py-24 md:py-28 bg-slate-50">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
 
             <div class="max-w-3xl mb-14 reveal">
@@ -447,7 +554,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
                 <!-- Project 1 -->
-                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
                             <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
@@ -459,7 +566,7 @@
                             HUGIN — Volve Field Data Lakehouse (North Sea)
                         </h3>
                         <p class="text-xs font-semibold text-brand-900 mb-4">
-                            Personal Project · Data Engineer · Aug 2026 – Present
+                            Personal Project · Data Engineer · Apr 2026 – Present
                         </p>
                         <p class="text-sm text-slate-600 leading-relaxed mb-5">
                             An end-to-end pipeline over Equinor's open Volve field dataset, built with Apache Airflow, dbt, Apache Iceberg, and Trino on a bronze–silver–gold medallion architecture. A Kimball dimensional model with Slowly Changing Dimension Type 2 sits on top of six different source formats: production CSV, WITSML XML, LAS well logs, directional surveys, fixed-width ASCII, and reservoir simulation reports.
@@ -472,11 +579,11 @@
                     </div>
                     <div>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Apache Airflow</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">dbt</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Apache Iceberg</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Trino</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Medallion Architecture</span>
+                            <span class="pill-light">Apache Airflow</span>
+                            <span class="pill-light">dbt</span>
+                            <span class="pill-light">Apache Iceberg</span>
+                            <span class="pill-light">Trino</span>
+                            <span class="pill-light">Medallion Architecture</span>
                         </div>
                         <a href="https://github.com/adetyatino/hugin" target="_blank" rel="noopener"
                            class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
@@ -486,7 +593,7 @@
                 </article>
 
                 <!-- Project 2 -->
-                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
                             <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
@@ -498,7 +605,7 @@
                             BNPL Portfolio Quality &amp; Early Warning
                         </h3>
                         <p class="text-xs font-semibold text-brand-900 mb-4">
-                            Independent Project · Data Analyst · Aug 2026 – Present
+                            Independent Project · Data Analyst · Jun 2026 – Present
                         </p>
                         <p class="text-sm text-slate-600 leading-relaxed mb-5">
                             A credit-risk analytics pipeline (Python → DuckDB → dbt) with 18 layered models and 152 automated data quality tests, turning a 905K-row account-month panel and 527K transactions into 8 BI-ready data marts. Rate/mix/denominator decomposition shows the headline NPL drop from 2.59% to 2.41% (May–June 2026) came from receivables growth in the denominator, not from genuine portfolio improvement. The underlying data is synthetic, calibrated against the public OJK release of June 2026 — 7 of 7 metrics fall within a ±10% tolerance.
@@ -511,11 +618,11 @@
                     </div>
                     <div>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">dbt</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">DuckDB</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">SQL</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Power BI</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Credit Risk</span>
+                            <span class="pill-light">dbt</span>
+                            <span class="pill-light">DuckDB</span>
+                            <span class="pill-light">SQL</span>
+                            <span class="pill-light">Power BI</span>
+                            <span class="pill-light">Credit Risk</span>
                         </div>
                         <a href="https://github.com/adetyatino/bnpl" target="_blank" rel="noopener"
                            class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
@@ -525,7 +632,7 @@
                 </article>
 
                 <!-- Project 3 -->
-                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
                             <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
@@ -550,10 +657,10 @@
                     </div>
                     <div>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Hierarchical Linear Model</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Spatial Mapping</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Data Integration</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Streamlit</span>
+                            <span class="pill-light">Hierarchical Linear Model</span>
+                            <span class="pill-light">Spatial Mapping</span>
+                            <span class="pill-light">Data Integration</span>
+                            <span class="pill-light">Streamlit</span>
                         </div>
                         <a href="https://finalprojectpusdatin.streamlit.app/" target="_blank" rel="noopener"
                            class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
@@ -563,7 +670,7 @@
                 </article>
 
                 <!-- Project 4 -->
-                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
                             <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
@@ -588,10 +695,10 @@
                     </div>
                     <div>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Product Selection</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Promotion Strategy</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Smart Recommendation</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Conversion Engine</span>
+                            <span class="pill-light">Product Selection</span>
+                            <span class="pill-light">Promotion Strategy</span>
+                            <span class="pill-light">Smart Recommendation</span>
+                            <span class="pill-light">Conversion Engine</span>
                         </div>
                         <a href="https://kleq4vydmrrc6xmmk68t37.streamlit.app/" target="_blank" rel="noopener"
                            class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
@@ -601,7 +708,7 @@
                 </article>
 
                 <!-- Project 5 -->
-                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
                             <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
@@ -626,9 +733,9 @@
                     </div>
                     <div>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Random Forest</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Data Analysis</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Python</span>
+                            <span class="pill-light">Random Forest</span>
+                            <span class="pill-light">Data Analysis</span>
+                            <span class="pill-light">Python</span>
                         </div>
                         <a href="https://datascienceproject-ja5ymavaprmywgbxsyqvjm.streamlit.app/" target="_blank" rel="noopener"
                            class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
@@ -638,7 +745,7 @@
                 </article>
 
                 <!-- Project 6 -->
-                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
                             <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
@@ -663,9 +770,9 @@
                     </div>
                     <div>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">XGBoost</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Machine Learning</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">EDA</span>
+                            <span class="pill-light">XGBoost</span>
+                            <span class="pill-light">Machine Learning</span>
+                            <span class="pill-light">EDA</span>
                         </div>
                         <a href="https://datascienceproject2-ls8yctqjaculgtx6fcd3fa.streamlit.app/" target="_blank" rel="noopener"
                            class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
@@ -675,7 +782,7 @@
                 </article>
 
                 <!-- Project 7 -->
-                <article class="bg-white rounded-3xl p-8 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col reveal">
+                <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
                             <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
@@ -699,10 +806,10 @@
                     </div>
                     <div>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Web GIS</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Geospatial Analysis</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Optimization</span>
-                            <span class="px-3 py-1 bg-slate-50 text-xs font-semibold rounded-full border border-slate-200">Folium</span>
+                            <span class="pill-light">Web GIS</span>
+                            <span class="pill-light">Geospatial Analysis</span>
+                            <span class="pill-light">Optimization</span>
+                            <span class="pill-light">Folium</span>
                         </div>
                         <span class="inline-flex items-center text-sm font-bold text-slate-400">
                             Internal Project <i data-lucide="lock" class="w-4 h-4 ml-1"></i>
@@ -711,7 +818,7 @@
                 </article>
 
                 <!-- Contact call-to-action card (not a project, so not an <article>) -->
-                <aside class="bg-brand-950 text-white rounded-3xl p-8 flex flex-col justify-center items-start reveal">
+                <aside class="surface graticule-dark bg-brand-950 text-white rounded-3xl p-8 flex flex-col items-start justify-center reveal">
                     <div class="w-12 h-12 bg-white/10 text-blue-300 rounded-2xl flex items-center justify-center mb-6">
                         <i data-lucide="sparkles" class="w-6 h-6"></i>
                     </div>
@@ -729,7 +836,7 @@
     </section>
 
     <!-- ============================ RESUME ============================ -->
-    <section id="resume" class="py-24 bg-slate-900 text-white">
+    <section id="resume" class="surface surface-navy graticule-dark glow-dark py-24 md:py-28 text-white">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
 
             <div class="max-w-3xl mb-14 reveal">
@@ -748,14 +855,14 @@
                         <i data-lucide="briefcase" class="w-7 h-7 mr-3 text-blue-400"></i> Experience
                     </h3>
 
-                    <div class="relative border-l border-slate-700 ml-2 space-y-10">
+                    <div class="timeline relative ml-2 space-y-10">
 
                         <!-- Job 1 -->
                         <div class="pl-8 relative">
                             <div class="absolute w-4 h-4 bg-blue-500 ring-4 ring-blue-500/20 rounded-full -left-[9px] top-1"></div>
                             <h4 class="text-lg font-bold leading-snug">Land Surveyor &amp; Geodynamic Data Analyst</h4>
                             <p class="text-blue-400 font-medium text-sm mb-1">Geological Agency · Contract</p>
-                            <p class="text-slate-500 text-xs font-semibold uppercase tracking-wide mb-3">May 2024 – Dec 2024</p>
+                            <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-3">May 2024 – Dec 2024</p>
                             <ul class="text-slate-400 text-sm leading-relaxed space-y-2">
                                 <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Conducted GNSS surveys and coordinated field teams for high-precision geospatial data collection.</li>
                                 <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Processed and analysed GNSS data using Linux-based GAMIT/GLOBK.</li>
@@ -769,7 +876,7 @@
                             <div class="absolute w-4 h-4 bg-slate-600 rounded-full -left-[9px] top-1"></div>
                             <h4 class="text-lg font-bold leading-snug">Research Assistant</h4>
                             <p class="text-blue-400 font-medium text-sm mb-1">Sepuluh Nopember Institute of Technology · Apprenticeship</p>
-                            <p class="text-slate-500 text-xs font-semibold uppercase tracking-wide mb-3">Nov 2023 – Dec 2024</p>
+                            <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-3">Nov 2023 – Dec 2024</p>
                             <ul class="text-slate-400 text-sm leading-relaxed space-y-2">
                                 <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Processed survey data from the Geospatial Information Agency using GAMIT on Linux.</li>
                                 <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Produced a Probabilistic Seismic Hazard Analysis of earthquakes in Lampung Province.</li>
@@ -782,7 +889,7 @@
                             <div class="absolute w-4 h-4 bg-slate-600 rounded-full -left-[9px] top-1"></div>
                             <h4 class="text-lg font-bold leading-snug">Cadastral Surveyor</h4>
                             <p class="text-blue-400 font-medium text-sm mb-1">ATR/BPN Surabaya 1 · Internship</p>
-                            <p class="text-slate-500 text-xs font-semibold uppercase tracking-wide mb-3">Aug 2023 – Sep 2023</p>
+                            <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-3">Aug 2023 – Sep 2023</p>
                             <ul class="text-slate-400 text-sm leading-relaxed space-y-2">
                                 <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Conducted cadastral surveys for the separation of land certificates.</li>
                                 <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Produced plots from field survey results.</li>
@@ -798,7 +905,7 @@
                     <h3 class="text-2xl font-extrabold mb-10 flex items-center">
                         <i data-lucide="graduation-cap" class="w-7 h-7 mr-3 text-blue-400"></i> Education
                     </h3>
-                    <div class="bg-slate-800 rounded-3xl p-8 mb-12 border border-slate-700">
+                    <div class="card-navy rounded-3xl p-8 mb-12">
                         <h4 class="text-lg font-bold">Bachelor of Geomatics Engineering</h4>
                         <p class="text-blue-400 font-medium text-sm mb-4">Sepuluh Nopember Institute of Technology (ITS) · Aug 2020 – Feb 2025</p>
                         <p class="text-slate-300 font-medium text-sm">GPA 3.06 / 4.00</p>
@@ -808,53 +915,53 @@
                         <i data-lucide="wrench" class="w-7 h-7 mr-3 text-blue-400"></i> Technical Skills
                     </h3>
                     <div class="space-y-5 mb-12">
-                        <div>
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2.5">Programming &amp; Database</p>
+                        <div class="border-l-2 border-blue-500/40 pl-4">
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2.5">Programming &amp; Database</p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Python</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">R</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">SQL</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">MATLAB</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Java</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Node.js</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">PostgreSQL (PostGIS)</span>
+                                <span class="pill-dark">Python</span>
+                                <span class="pill-dark">R</span>
+                                <span class="pill-dark">SQL</span>
+                                <span class="pill-dark">MATLAB</span>
+                                <span class="pill-dark">Java</span>
+                                <span class="pill-dark">Node.js</span>
+                                <span class="pill-dark">PostgreSQL (PostGIS)</span>
                             </div>
                         </div>
-                        <div>
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2.5">Machine Learning &amp; Analytics</p>
+                        <div class="border-l-2 border-blue-500/40 pl-4">
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2.5">Machine Learning &amp; Analytics</p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Exploratory Data Analysis</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Data Cleaning &amp; Preprocessing</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Predictive Analytics</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Machine Learning</span>
+                                <span class="pill-dark">Exploratory Data Analysis</span>
+                                <span class="pill-dark">Data Cleaning &amp; Preprocessing</span>
+                                <span class="pill-dark">Predictive Analytics</span>
+                                <span class="pill-dark">Machine Learning</span>
                             </div>
                         </div>
-                        <div>
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2.5">Visualization &amp; Business Intelligence</p>
+                        <div class="border-l-2 border-blue-500/40 pl-4">
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2.5">Visualization &amp; Business Intelligence</p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Power BI</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Tableau</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Microsoft Excel</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Streamlit</span>
+                                <span class="pill-dark">Power BI</span>
+                                <span class="pill-dark">Tableau</span>
+                                <span class="pill-dark">Microsoft Excel</span>
+                                <span class="pill-dark">Streamlit</span>
                             </div>
                         </div>
-                        <div>
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2.5">Geospatial &amp; Engineering</p>
+                        <div class="border-l-2 border-blue-500/40 pl-4">
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2.5">Geospatial &amp; Engineering</p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">ArcGIS</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">QGIS</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">GAMIT/GLOBK</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">AutoCAD</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Agisoft Metashape</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">Surpac</span>
+                                <span class="pill-dark">ArcGIS</span>
+                                <span class="pill-dark">QGIS</span>
+                                <span class="pill-dark">GAMIT/GLOBK</span>
+                                <span class="pill-dark">AutoCAD</span>
+                                <span class="pill-dark">Agisoft Metashape</span>
+                                <span class="pill-dark">Surpac</span>
                             </div>
                         </div>
-                        <div>
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2.5">Web Development</p>
+                        <div class="border-l-2 border-blue-500/40 pl-4">
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2.5">Web Development</p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">JavaScript</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">HTML</span>
-                                <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 rounded-lg text-sm font-semibold border border-slate-700">CSS</span>
+                                <span class="pill-dark">JavaScript</span>
+                                <span class="pill-dark">HTML</span>
+                                <span class="pill-dark">CSS</span>
                             </div>
                         </div>
                     </div>
@@ -875,7 +982,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
                     <!-- Pusdatin — Data Science Trainee -->
-                    <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col">
+                    <div class="card-navy rounded-2xl p-6 flex flex-col">
                         <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-5">
                             <i data-lucide="award" class="w-5 h-5"></i>
                         </div>
@@ -885,12 +992,12 @@
                         </p>
                         <div class="mt-auto pt-4 border-t border-slate-700">
                             <p class="text-slate-300 text-xs font-semibold">Pusdatin, Ministry of Primary &amp; Secondary Education</p>
-                            <p class="text-slate-500 text-[11px] mt-1">Runs until Aug 2026</p>
+                            <p class="text-slate-400 text-[11px] mt-1">Runs until Aug 2026</p>
                         </div>
                     </div>
 
                     <!-- Azure AI Fundamentals -->
-                    <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col">
+                    <div class="card-navy rounded-2xl p-6 flex flex-col">
                         <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-5">
                             <i data-lucide="brain-circuit" class="w-5 h-5"></i>
                         </div>
@@ -900,12 +1007,12 @@
                         </p>
                         <div class="mt-auto pt-4 border-t border-slate-700">
                             <p class="text-slate-300 text-xs font-semibold">Microsoft · Certiport</p>
-                            <p class="text-slate-500 text-[11px] mt-1">Issued 31 Mar 2026 · Verify code wYa7m-2FMo</p>
+                            <p class="text-slate-400 text-[11px] mt-1">Issued 31 Mar 2026 · Verify code wYa7m-2FMo</p>
                         </div>
                     </div>
 
                     <!-- Dicoding — Applied Data Science -->
-                    <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col">
+                    <div class="card-navy rounded-2xl p-6 flex flex-col">
                         <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-5">
                             <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
                         </div>
@@ -915,12 +1022,12 @@
                         </p>
                         <div class="mt-auto pt-4 border-t border-slate-700">
                             <p class="text-slate-300 text-xs font-semibold">Dicoding Indonesia</p>
-                            <p class="text-slate-500 text-[11px] mt-1">Issued 18 Apr 2026 · Valid to 18 Apr 2029 · ID QLZ99V25MZ5D</p>
+                            <p class="text-slate-400 text-[11px] mt-1">Issued 18 Apr 2026 · Valid to 18 Apr 2029 · ID QLZ99V25MZ5D</p>
                         </div>
                     </div>
 
                     <!-- APDI — Remote Pilot Certificate -->
-                    <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col">
+                    <div class="card-navy rounded-2xl p-6 flex flex-col">
                         <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-5">
                             <i data-lucide="plane" class="w-5 h-5"></i>
                         </div>
@@ -930,12 +1037,12 @@
                         </p>
                         <div class="mt-auto pt-4 border-t border-slate-700">
                             <p class="text-slate-300 text-xs font-semibold">Asosiasi Pilot Drone Indonesia (APDI) · DGCA UASTC-002</p>
-                            <p class="text-slate-500 text-[11px] mt-1">Issued 15 Jun 2025 · Valid 2 years · Cert. No. 11651-2025</p>
+                            <p class="text-slate-400 text-[11px] mt-1">Issued 15 Jun 2025 · Valid 2 years · Cert. No. 11651-2025</p>
                         </div>
                     </div>
 
                     <!-- BNSP — Construction Safety -->
-                    <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col">
+                    <div class="card-navy rounded-2xl p-6 flex flex-col">
                         <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-5">
                             <i data-lucide="hard-hat" class="w-5 h-5"></i>
                         </div>
@@ -945,7 +1052,7 @@
                         </p>
                         <div class="mt-auto pt-4 border-t border-slate-700">
                             <p class="text-slate-300 text-xs font-semibold">BNSP — Indonesia Professional Certification Authority</p>
-                            <p class="text-slate-500 text-[11px] mt-1">Issued 5 Jun 2025 · Valid 5 years · No. 74321 2263.02 7 00000288 2025</p>
+                            <p class="text-slate-400 text-[11px] mt-1">Issued 5 Jun 2025 · Valid 5 years · No. 74321 2263.02 7 00000288 2025</p>
                         </div>
                     </div>
 
@@ -960,30 +1067,30 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                    <div class="bg-slate-800 rounded-3xl p-7 border border-slate-700">
+                    <div class="card-navy rounded-3xl p-7">
                         <h4 class="text-base font-bold leading-snug mb-1">Laboratory Assistant</h4>
                         <p class="text-blue-400 font-medium text-sm mb-1">Geodesy &amp; Geodynamics Laboratory, ITS</p>
-                        <p class="text-slate-500 text-xs font-semibold uppercase tracking-wide mb-4">Nov 2023 – Dec 2024</p>
+                        <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-4">Nov 2023 – Dec 2024</p>
                         <ul class="text-slate-400 text-sm leading-relaxed space-y-2">
                             <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Contributed to academic projects and research activities.</li>
                             <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Delivered teamwork-based assignments.</li>
                         </ul>
                     </div>
 
-                    <div class="bg-slate-800 rounded-3xl p-7 border border-slate-700">
+                    <div class="card-navy rounded-3xl p-7">
                         <h4 class="text-base font-bold leading-snug mb-1">Geocentric Event Staff</h4>
                         <p class="text-blue-400 font-medium text-sm mb-1">ITS Geomatics Student Association</p>
-                        <p class="text-slate-500 text-xs font-semibold uppercase tracking-wide mb-4">Oct 2021 – Aug 2024</p>
+                        <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-4">Oct 2021 – Aug 2024</p>
                         <ul class="text-slate-400 text-sm leading-relaxed space-y-2">
                             <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Person in charge of the 2022 ITS Geomatics Engineering graduation ceremony.</li>
                             <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Produced event documentation and designed sponsorship proposals.</li>
                         </ul>
                     </div>
 
-                    <div class="bg-slate-800 rounded-3xl p-7 border border-slate-700">
+                    <div class="card-navy rounded-3xl p-7">
                         <h4 class="text-base font-bold leading-snug mb-1">Public Relations — Community Service</h4>
                         <p class="text-blue-400 font-medium text-sm mb-1">Ponorogo Regency</p>
-                        <p class="text-slate-500 text-xs font-semibold uppercase tracking-wide mb-4">Jun – Aug 2022</p>
+                        <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-4">Jun – Aug 2022</p>
                         <ul class="text-slate-400 text-sm leading-relaxed space-y-2">
                             <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Installed on-grid solar power systems.</li>
                             <li class="flex gap-2"><span class="text-blue-400 mt-0.5">▪</span> Connected the service team with the local community and delivered solar power education.</li>
@@ -993,10 +1100,11 @@
                 </div>
             </div>
         </div>
+        <hr class="rule-fade-dark">
     </section>
 
     <!-- ============================ CONTACT ============================ -->
-    <section id="contact" class="py-24 bg-white border-t border-slate-100">
+    <section id="contact" class="surface graticule glow-light py-24 md:py-28 bg-white">
         <div class="max-w-4xl mx-auto px-6 md:px-12 text-center reveal">
             <p class="text-sm font-bold uppercase tracking-widest text-brand-900 mb-3">Get in Touch</p>
             <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-5">Let's Work Together</h2>
@@ -1020,7 +1128,7 @@
             </div>
 
             <!-- CV download, both languages -->
-            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 mb-12">
+            <div class="card-light bg-slate-50 rounded-3xl border border-slate-200 p-6 mb-12">
                 <p class="text-sm font-bold text-slate-800 mb-1">Curriculum Vitae</p>
                 <p class="text-sm text-slate-500 mb-5">Available in English and Bahasa Indonesia (PDF).</p>
                 <div class="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3">
@@ -1036,22 +1144,22 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-                <a href="mailto:adetyatino@gmail.com" class="bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-brand-200 transition-colors">
+                <a href="mailto:adetyatino@gmail.com" class="card-light bg-slate-50 rounded-2xl border border-slate-100 p-5 transition-all hover:border-brand-200 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <i data-lucide="mail" class="w-5 h-5 text-brand-900 mb-3"></i>
                     <p class="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Email</p>
                     <p class="text-sm font-semibold text-slate-800 break-all">adetyatino@gmail.com</p>
                 </a>
-                <a href="https://linkedin.com/in/adetyatinofo" target="_blank" rel="noopener" class="bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-brand-200 transition-colors">
+                <a href="https://linkedin.com/in/adetyatinofo" target="_blank" rel="noopener" class="card-light bg-slate-50 rounded-2xl border border-slate-100 p-5 transition-all hover:border-brand-200 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <svg class="w-5 h-5 text-brand-900 mb-3"><use href="#icon-linkedin"></use></svg>
                     <p class="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">LinkedIn</p>
                     <p class="text-sm font-semibold text-slate-800 break-all">in/adetyatinofo</p>
                 </a>
-                <a href="https://github.com/adetyatino" target="_blank" rel="noopener" class="bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-brand-200 transition-colors">
+                <a href="https://github.com/adetyatino" target="_blank" rel="noopener" class="card-light bg-slate-50 rounded-2xl border border-slate-100 p-5 transition-all hover:border-brand-200 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <svg class="w-5 h-5 text-brand-900 mb-3"><use href="#icon-github"></use></svg>
                     <p class="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">GitHub</p>
                     <p class="text-sm font-semibold text-slate-800 break-all">@adetyatino</p>
                 </a>
-                <a href="https://wa.me/6285233869497" target="_blank" rel="noopener" class="bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-brand-200 transition-colors">
+                <a href="https://wa.me/6285233869497" target="_blank" rel="noopener" class="card-light bg-slate-50 rounded-2xl border border-slate-100 p-5 transition-all hover:border-brand-200 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <i data-lucide="message-circle" class="w-5 h-5 text-brand-900 mb-3"></i>
                     <p class="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">WhatsApp</p>
                     <p class="text-sm font-semibold text-slate-800 break-all">+62 852-3386-9497</p>
@@ -1067,7 +1175,8 @@
     </main>
 
     <!-- ============================ FOOTER ============================ -->
-    <footer class="bg-slate-950 text-slate-500 py-10 text-center text-sm border-t border-slate-800">
+    <footer class="relative bg-[#0b1329] text-slate-400 py-10 text-center text-sm">
+        <hr class="rule-fade-dark absolute inset-x-0 top-0">
         <img src="assets/logo-mark-white.png" alt="ATF monogram logo" width="206" height="128"
              class="h-10 w-auto mx-auto mb-4 opacity-90" loading="lazy" decoding="async">
         <p class="font-semibold text-slate-300 mb-1">Adetya Tino Forrestiawan</p>
@@ -1140,11 +1249,14 @@
 
         // ---- Back-to-top button ----
         const toTop = document.getElementById('to-top');
+        const siteNav = document.getElementById('site-nav');
 
         window.addEventListener('scroll', () => {
             const show = window.scrollY > 600;
+            const scrolled = window.scrollY > 20;
             toTop.classList.toggle('opacity-0', !show);
             toTop.classList.toggle('pointer-events-none', !show);
+            siteNav.classList.toggle('nav-scrolled', scrolled);
         }, { passive: true });
 
         toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
