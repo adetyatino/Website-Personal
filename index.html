@@ -6,12 +6,12 @@
     <title>Adetya Tino Forrestiawan — Data Scientist &amp; Geospatial Analyst</title>
 
     <!-- SEO & Social Preview -->
-    <meta name="description" content="Portfolio of Adetya Tino Forrestiawan — Data Scientist &amp; Geospatial Analyst. Geomatics Engineering graduate from ITS with experience at the Geological Agency and ITS, turning geospatial and complex data into actionable insights through machine learning and advanced analytics.">
+    <meta name="description" content="Portfolio of Adetya Tino Forrestiawan — Data Scientist &amp; Geospatial Analyst. Geomatics Engineering graduate from ITS with experience at the Geological Agency and ITS, turning geospatial and complex data into actionable insights through machine learning, mineral prospectivity mapping, and advanced analytics.">
     <meta name="author" content="Adetya Tino Forrestiawan">
-    <meta name="keywords" content="Data Scientist, Data Analyst, Geospatial, Web GIS, Machine Learning, Python, SQL, Power BI, Streamlit, Adetya Tino">
+    <meta name="keywords" content="Data Scientist, Data Analyst, Geospatial, Web GIS, Machine Learning, Python, SQL, Power BI, Streamlit, Adetya Tino, Mineral Prospectivity, AHP, Nickel Laterite, Mineral Exploration">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Adetya Tino Forrestiawan — Data Scientist &amp; Geospatial Analyst">
-    <meta property="og:description" content="Portfolio of data engineering, analytics engineering, machine learning, and Web GIS projects — pipelines, data quality, warehouse modelling, and dashboards. Open to Data Engineer, Data Analyst, and Data Scientist opportunities.">
+    <meta property="og:description" content="Portfolio of data engineering, analytics engineering, machine learning, mineral prospectivity mapping, and Web GIS projects — pipelines, data quality, warehouse modelling, and dashboards. Open to Data Engineer, Data Analyst, and Data Scientist opportunities.">
     <meta property="og:image" content="Portfolio_foto.png">
     <meta property="og:url" content="https://adetyatino.github.io/AdetyaTinoPortfolio/">
     <link rel="canonical" href="https://adetyatino.github.io/AdetyaTinoPortfolio/">
@@ -421,7 +421,7 @@
                 <!-- Key figures -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full border-t border-slate-200 pt-8">
                     <div>
-                        <p class="text-2xl md:text-3xl font-extrabold text-slate-900">7+</p>
+                        <p class="text-2xl md:text-3xl font-extrabold text-slate-900">8+</p>
                         <p class="text-xs text-slate-500 font-semibold uppercase tracking-wide mt-1">Data Projects</p>
                     </div>
                     <div>
@@ -504,10 +504,12 @@
                     </div>
                     <h3 class="text-lg font-bold text-slate-900 mb-2">Geospatial Analysis</h3>
                     <p class="text-sm text-slate-600 leading-relaxed mb-4">
-                        Spatial analysis and mapping, geodesic distance optimisation, high-precision GNSS data processing, and Web GIS delivery.
+                        Spatial analysis and mapping, mineral prospectivity mapping, geodesic distance optimisation, high-precision GNSS data processing, and Web GIS delivery.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         <span class="pill-light">ArcGIS &amp; QGIS</span>
+                        <span class="pill-light">GDAL / OGR</span>
+                        <span class="pill-light">AHP Multi-Criteria</span>
                         <span class="pill-light">GAMIT/GLOBK</span>
                         <span class="pill-light">Generic Mapping Tools</span>
                         <span class="pill-light">Agisoft Metashape</span>
@@ -547,13 +549,53 @@
                 <p class="text-sm font-bold uppercase tracking-widest text-brand-900 mb-3">Portfolio</p>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Selected Projects</h2>
                 <p class="text-slate-600 leading-relaxed">
-                    Seven selected projects covering the full workflow: framing the problem, building the pipeline and warehouse model, guarding it with automated data quality tests, and shipping a finished model or dashboard you can open right now.
+                    Eight selected projects covering the full workflow: framing the problem, building the pipeline and warehouse model, guarding it with automated data quality tests, and shipping a finished model, map, or dashboard you can open right now.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
                 <!-- Project 1 -->
+                <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 bg-blue-100 text-brand-900 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="mountain" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Mineral Exploration</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 leading-snug">
+                            Nickel Laterite Prospectivity Mapping — East Halmahera
+                        </h3>
+                        <p class="text-xs font-semibold text-brand-900 mb-4">
+                            Independent Project · Geospatial Analyst (Exploration) · Jun 2026 – Present
+                        </p>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                            A reproducible seven-stage geospatial pipeline (Python, GDAL/OGR, QGIS) built on official Badan Geologi and Badan Informasi Geospasial data — a 1:100,000 geological map with 13 rock units, 247 mapped structural lines, 8 m DEMNAS elevations on EGM2008 orthometric heights, and 1:50,000 Rupabumi under the KUGI schema — all harmonised to EPSG:32652 (WGS 84 / UTM 52N) on a pixel-aligned 20 m analysis grid with automated alignment checks. Prospectivity is scored from four criteria — ultramafic lithology, slope, topographic position index, and lineament density — weighted by Analytical Hierarchy Process principal-eigenvector weights, using Saaty's Random Index of 0.90 for n=4 and an automatic halt if the Consistency Ratio reaches 0.1.
+                        </p>
+                        <ul class="text-sm text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Dropped the distance-to-fault criterion after an attribute audit showed every feature in the structure layer was a lineament — the same thing the extraction produced — removing double-counted structural control and restoring independence between the model criteria and the data used to validate them</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Quantified how positional uncertainty in unit boundaries propagates to the analysis resolution: a 50 m buffer (0.5 mm at the 1:100,000 source scale) along 748 km of unit contacts covers 3.27% of the effective land area, which is what justifies a 20 m analysis cell against the accuracy of the source data</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Applied legal constraints as a final mask rather than a weighted criterion, so a high geological score can never offset a legal prohibition — every input and output ships with a SHA-256 manifest and an execution log as evidence of reproducibility</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-900 shrink-0 mt-0.5"></i> Designed the follow-up programme for priority blocks above a 25 ha threshold: 100 m drill grids tightening to 50 m in the highest class, points screened against the land mask and a 100 m coastline setback, minimum-spanning-tree reconnaissance traverses, and a static GNSS control network (10 km maximum baseline, two bases per block, sites under 10° slope, height differences above 500 m flagged for tropospheric delay)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="pill-light">Python</span>
+                            <span class="pill-light">GDAL / OGR</span>
+                            <span class="pill-light">QGIS</span>
+                            <span class="pill-light">AHP</span>
+                            <span class="pill-light">Mineral Prospectivity</span>
+                        </div>
+                        <a href="https://bit.ly/PemetaanProspektivitasGeologiNikelLaterit" target="_blank" rel="noopener"
+                           class="inline-flex items-center text-sm font-bold text-brand-900 group-hover:underline">
+                            View Project <i data-lucide="arrow-up-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
                 <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
@@ -592,7 +634,7 @@
                     </div>
                 </article>
 
-                <!-- Project 2 -->
+                <!-- Project 3 -->
                 <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
@@ -631,7 +673,7 @@
                     </div>
                 </article>
 
-                <!-- Project 3 -->
+                <!-- Project 4 -->
                 <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
@@ -669,7 +711,7 @@
                     </div>
                 </article>
 
-                <!-- Project 4 -->
+                <!-- Project 5 -->
                 <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
@@ -707,7 +749,7 @@
                     </div>
                 </article>
 
-                <!-- Project 5 -->
+                <!-- Project 6 -->
                 <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
@@ -744,7 +786,7 @@
                     </div>
                 </article>
 
-                <!-- Project 6 -->
+                <!-- Project 7 -->
                 <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
@@ -781,7 +823,7 @@
                     </div>
                 </article>
 
-                <!-- Project 7 -->
+                <!-- Project 8 -->
                 <article class="card-light bg-white rounded-3xl border border-slate-200 p-8 group flex flex-col reveal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(19,32,76,.35)]">
                     <div class="flex-1">
                         <div class="flex items-start justify-between mb-6">
